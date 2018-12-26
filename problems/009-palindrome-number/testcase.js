@@ -5,31 +5,31 @@ const program = require('./index');
 const testCases = [
     {
         input: [123],
-        output: 321
+        output: false
     },
     {
-        input: [-123],
-        output: -321
+        input: [-121],
+        output: false
     },
     {
-        input: [120],
-        output: 21
+        input: [121],
+        output: true
     },
     {
-        input: [1534236469],
-        output: 0
+        input: [2],
+        output: true
     },
     {
-        input: [-2147483648],
-        output: 0
+        input: [20],
+        output: false
     },
     {
-        input: [1463847412],
-        output: 2147483641
+        input: [212212],
+        output: true
     }
 ];
 
-describe('007-reverse-integer', () => {
+describe('009-palindrome-number', () => {
     it('testcase should be equals', () => {
         testCases.forEach(testcase => {
             assert.deepEqual(program.apply(null, testcase.input), testcase.output);

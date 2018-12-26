@@ -18,7 +18,7 @@ const testCases = [
 ];
 
 describe('001-two-sum', () => {
-    it('testcase should be', () => {
+    it('testcase should be equals', () => {
         testCases.forEach(testcase => {
             assert.deepEqual(program.apply(null, testcase.input), testcase.output);
         });

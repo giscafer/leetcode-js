@@ -4,9 +4,9 @@
  * @return {number}
  */
 
-var reverse = function (x) {
+const reverse = function (x) {
     if (typeof x !== 'number') throw new Error('x must be number');
-    if ((x < (-2) ** 31 || x > (2 ** 31 - 1)) || x === 0) {
+    if ((x < Math.pow(-2, 31) || x > (Math.pow(2, 31) - 1)) || x === 0) {
         return 0;
     }
     let isNegative = false;
@@ -14,7 +14,7 @@ var reverse = function (x) {
         isNegative = true;
     }
     let y = String(Math.abs(x)).split('').reverse().join('');
-    if (y >= (2 ** 31 - 1)) {
+    if (y >= (Math.pow(2, 31) - 1)) {
         return 0;
     }
     if (isNegative) {
@@ -22,6 +22,5 @@ var reverse = function (x) {
     }
     return y - 0;
 };
-
 
 module.exports = reverse;
