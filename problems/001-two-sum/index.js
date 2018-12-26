@@ -1,7 +1,5 @@
 
-
-
-/* 
+/*
 给定 nums = [2, 7, 11, 15], target = 9
 
 因为 nums[0] + nums[1] = 2 + 7 = 9
@@ -23,8 +21,9 @@ var twoSum = function (nums, target) {
         }
         map[nums[i]] = i;
     }
-    console.log(map)
+    return [];
 };
+// 解法二：暴力双重循环
 /* var twoSum = function (nums, target) {
 
     for (let i = 0; i < nums.length; i++) {
@@ -36,5 +35,4 @@ var twoSum = function (nums, target) {
     }
 }; */
 
-result = twoSum([2, 7, 11, 15], 9)
-console.log(result);
+module.exports = twoSum;

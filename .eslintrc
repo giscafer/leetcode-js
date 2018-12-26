@@ -1,0 +1,33 @@
+{
+    "extends": "airbnb/legacy",
+    "rules": {
+        "no-unused-vars": 0,
+        "func-names": 0,
+        "no-console": 0,
+        "vars-on-top": 0,
+        "no-use-before-define": 0,
+        "linebreak-style": 0,
+        "indent": [
+            "error",
+            4
+        ],
+        "eol-last": 0,
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1,
+                "maxEOF": 0
+            }
+        ],
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ]
+    },
+    "env": {
+        "mocha": true,
+        "es6": true
+    }
+}

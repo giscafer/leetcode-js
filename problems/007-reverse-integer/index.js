@@ -24,7 +24,4 @@ var reverse = function (x) {
 };
 
 
-console.log(reverse(123))
-console.log(reverse(-234))
-console.log(reverse(-120))
-console.log(reverse(1534236469))
+module.exports = reverse;
