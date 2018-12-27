@@ -8,7 +8,8 @@
  * 否则就减去该值。以此类推到最左边的数，最终得到的结果即是答案
  */
 
-const romanObj = {
+// 符合映射值
+const romanMap = {
     I: 1,
     II: 2,
     III: 3,
@@ -37,16 +38,16 @@ const romanToInt = s => {
 
     // I开头和V开头的都是个位数
     if (firstChar === 'I' || firstChar === 'V') {
-        return romanObj[s];
+        return romanMap[s];
     }
     // 如果总字符只有两个
     if (length === 2) {
         // 已给出值的搭配
-        if (romanObj[s]) {
-            return romanObj[s];
+        if (romanMap[s]) {
+            return romanMap[s];
         }
         // 其他
-        return romanObj[firstChar] + romanObj[chars[1]];
+        return romanMap[firstChar] + romanMap[chars[1]];
     }
 
     // 超过3位字符时 MMCCCXCIX
@@ -56,24 +57,24 @@ const romanToInt = s => {
     const lastChar = chars.reduce((pre, cur, index, arr) => {
         if (skipIndex === index) return cur;
 
-        if (romanObj[pre] - romanObj[cur] < 0) {
-            result += (romanObj[cur] - romanObj[pre]);
+        if (romanMap[pre] - romanMap[cur] < 0) {
+            result += (romanMap[cur] - romanMap[pre]);
             skipIndex = index + 1;
             if (index === (length - 1)) skipEnd = true;
-            // console.log(`${pre} ${romanObj[pre]} 小于0 `, cur, result);
+            // console.log(`${pre} ${romanMap[pre]} 小于0 `, cur, result);
         } else if (index === 1) {
-            result = romanObj[pre];
-            // console.log(`${pre} ${romanObj[pre]} ：index=1`, cur, result);
+            result = romanMap[pre];
+            // console.log(`${pre} ${romanMap[pre]} ：index=1`, cur, result);
         } else {
-            result += romanObj[pre];
-            // console.log(`${pre} ${romanObj[pre]}`, cur, result);
+            result += romanMap[pre];
+            // console.log(`${pre} ${romanMap[pre]}`, cur, result);
         }
 
         return cur;
     });
     // 单字符匹配的次数是奇数的时候，最后一个字符再计算（因为循环里边一直用pre计数）
     if (!skipEnd) {
-        result += romanObj[lastChar];
+        result += romanMap[lastChar];
     }
 
     return result;
