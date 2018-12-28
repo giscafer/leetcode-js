@@ -1,2 +1,4 @@
 # leetcode-js
-just my leetcode solution
+my leetcode solution in javascript
+
+
