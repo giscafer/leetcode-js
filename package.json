@@ -2,15 +2,19 @@
   "name": "leetcode-js",
   "version": "1.0.0",
   "description": "just my leetcode solution",
-  "main": "test/index.js",
+  "main": "index.js",
   "scripts": {
-    "test": "node test/index.js"
+    "lint": "eslint ./src/*",
+    "test": "jest",
+    "ci": "npm run lint && npm run test -- --coverage"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/giscafer/leetcode-js.git"
   },
   "keywords": [
+    "algorithms",
+    "data-structures",
     "leetcode",
     "javascript",
     "leetcode-js"
@@ -22,9 +26,16 @@
   },
   "homepage": "https://github.com/giscafer/leetcode-js#readme",
   "devDependencies": {
-    "eslint": "^5.11.0",
+    "@babel/cli": "^7.8.4",
+    "@babel/preset-env": "^7.8.7",
+    "@types/jest": "^25.1.4",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
-    "glob": "^7.1.3",
-    "mocha": "^5.2.0"
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.8.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0"
   }
 }

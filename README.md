@@ -6,7 +6,7 @@ my leetcode solution in javascript
 
 - install dependencies ：`npm install`
 - run all testcase ：`npm run test`
-- run single testcase ：`mocha [dirpath]/testcase.js`
+- run single testcase ：`./node_modules/jest/bin/jest.js ./src/data-structures/linked-list/__test__/LinkedListNode.test.js`
 
 ## [License](./LICENSE)
 
