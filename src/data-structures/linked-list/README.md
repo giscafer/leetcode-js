@@ -2,16 +2,28 @@
 
 > 正确链表代码的六个技巧。分别是理解指针或引用的含义、警惕指针丢失和内存泄漏、利用哨兵简化实现难度、重点留意边界条件处理，以及举例画图、辅助思考，还有多写多练。
 
-- JavaScript 实现链表
-- 单链表反转
-- 链表中环的检测
-- 两个有序的链表合并
-- 删除链表倒数第 n 个结点
-- 求链表的中间结点
-- [约瑟夫问题](https://zh.wikipedia.org/wiki/约瑟夫斯问题)
-- 如何基于链表实现 LRU 缓存淘汰算法？
-- 除了基于链表的实现思路，实际上还可以用数组来实现 LRU 缓存淘汰策略。如何利用数组实现 LRU 缓存淘汰策略呢？
-- 如何判断一个字符串是否是回文字符串的问题，我想你应该听过，我们今天的题目就是基于这个问题的改造版本。如果字符串是通过单链表来存储的，那该如何来判断是一个回文串呢？你有什么好的解决思路呢？相应的时间空间复杂度又是多少呢？
+<!--ts-->
+   * [目录](#链表)
+      * [JavaScript 实现链表](#javascript-实现链表)
+      * [单链表反转](#单链表反转)
+         * [(一) 双指针迭代](#一-双指针迭代)
+         * [（二）尾递归](#二尾递归)
+         * [(三) 递归解法](#三-递归解法)
+         * [（四）栈解](#四栈解)
+      * [链表中环的检测](#链表中环的检测)
+         * [标记法](#标记法)
+         * [Set 集合判断是否有环](#set-集合判断是否有环)
+         * [快慢指针](#快慢指针)
+      * [两个有序的链表合并](#两个有序的链表合并)
+      * [删除链表倒数第 n 个结点](#删除链表倒数第-n-个结点)
+      * [求链表的中间结点](#求链表的中间结点)
+      * [如何基于链表实现 LRU 缓存淘汰算法？](#如何基于链表实现-lru-缓存淘汰算法)
+      * [如果字符串是通过单链表来存储的，那该如何来判断是一个回文串？](#如果字符串是通过单链表来存储的那该如何来判断是一个回文串)
+      * [约瑟夫问题](#约瑟夫问题)
+
+<!-- Added by: giscafer, at: Mon Mar 16 21:01:02 CST 2020 -->
+
+<!--te-->
 
 ## JavaScript 实现链表
 
@@ -105,6 +117,7 @@ var reverseList = function(value) {
 
   let next = head.next;
   // 递归：利用了函数调用执行栈原理，先进后出（最先调用的函数会在递归过程中最后执行，而最后调用的会最先执行）
+  // 所以链表是从尾部开始改变指针的
   let newHead = reverseList(next);
 
   next.next = head; // head.next 指向的节点的后继指针改为指向 head(反转)
@@ -269,7 +282,6 @@ var hasCircle = function(head) {
 LeetCode 相关题目：
 
 - [21. 合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
--
 
 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。
 
@@ -288,7 +300,7 @@ LeetCode 相关题目：
  * }
  */
 /**
- * 时间复杂度O(n)，空间复杂度O（1）
+ * 利用哨兵节点迭代，时间复杂度O(n)，空间复杂度O（1）
  * @param {ListNode} l1
  * @param {ListNode} l2
  * @return {ListNode}
@@ -387,3 +399,165 @@ var removeNthFromEnd = function(head, n) {
 
 > https://leetcode-cn.com/problems/middle-of-the-linked-list/
 
+解法：
+
+- 双遍历法：遍历得到链表长度，然后计算中间节点的位置，果有两个中间结点，则返回第二个中间结点。
+- 快慢指针法：当用慢指针 slow 遍历列表时，让另一个指针 fast 的速度是它的两倍。当 fast 到达列表的末尾时，slow 必然位于中间。
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * 双遍历法
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var middleNode = function(head) {
+  let len = 0;
+  let temp = head;
+  while (temp) {
+    len++;
+    temp = temp.next;
+  }
+
+  let mid = Math.floor(len / 2);
+  while (mid--) {
+    head = head.next;
+  }
+  return head;
+};
+```
+
+解法 2：快慢指针法
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * 快慢指针法
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var middleNode = function(head) {
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+  return slow;
+};
+```
+
+## 如何基于链表实现 LRU 缓存淘汰算法？
+
+`LRU` 是 Least Recently Used，最近最少使用策略。
+
+思路：我们维护一个有序单链表，越靠近链表尾部的结点是越早之前访问的。当有一个新的数据被访问时，我们从链表头开始顺序遍历链表。
+
+1. 如果此数据之前已经被缓存在链表中了，我们遍历得到这个数据对应的结点，并将其从原来的位置删除，然后再插入到链表的头部。
+
+2. 如果此数据没有在缓存链表中，又可以分为两种情况：
+
+- 如果此时缓存未满，则将此结点直接插入到链表的头部；
+
+- 如果此时缓存已满，则链表尾结点删除，将新的数据结点插入链表的头部。
+
+这样我们就用链表实现了一个 LRU 缓存，是不是很简单？
+
+## 如果字符串是通过单链表来存储的，那该如何来判断是一个回文串？
+
+其实就是判断一个链表是否为回文链表，leetcode 相关题目：https://leetcode-cn.com/problems/palindrome-linked-list/
+
+解法：
+
+- 方法一：将值复制到数组中后用双指针法
+- 方法二：快慢指针法，快指针走两步，慢指针走一步，找到链表的中点。然后，翻转后半部分。最后从头、中点开始判断是否相同
+
+```js
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * 方法一：将值复制到数组中后用双指针法;
+ * 时间复杂度O(n)，空间复杂度O(n)
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function(head) {
+  let vals = [];
+  while (head) {
+    vals.push(head.val);
+    head = head.next;
+  }
+  // 数组双指针首尾一起遍历，数组访问元素复杂度是O(1)
+  let len = vals.length - 1;
+  let s = 0;
+  while (len >= s) {
+    if (vals[s] !== vals[len]) {
+      return false;
+    }
+    len--;
+    s++;
+  }
+  return true;
+};
+```
+
+解法二：快慢指针法
+
+```js
+/**
+ * 方法二：快慢指针法
+ * 时间复杂度O(n)，空间复杂度O(1)
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function(head) {
+  // 得到链表中间结点slow
+  let slow = head;
+  let fast = head;
+  while (fast && fast.next) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  // 反转中间结点开始的后半链表
+  let prev = null;
+  while (slow) {
+    let next = slow.next;
+    slow.next = prev;
+    prev = slow;
+    slow = next;
+  }
+
+  // 对比链表前半部分和反转后的后半部分
+  while (prev && head) {
+    if (head.val !== prev.val) {
+      return false;
+    }
+    prev = prev.next;
+    head = head.next;
+  }
+
+  return true;
+};
+```
+
+## 约瑟夫问题
+
+[约瑟夫问题](https://zh.wikipedia.org/wiki/约瑟夫斯问题)
