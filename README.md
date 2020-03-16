@@ -10,6 +10,8 @@ my leetcode solution in javascript
 
 ## [License](./LICENSE)
 
+![](./fe-insights.jpg)
+
 ---
 
 > [giscafer.com](http://giscafer.com) &nbsp;&middot;&nbsp;

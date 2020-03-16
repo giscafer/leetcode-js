@@ -561,3 +561,9 @@ var isPalindrome = function(head) {
 ## 约瑟夫问题
 
 [约瑟夫问题](https://zh.wikipedia.org/wiki/约瑟夫斯问题)
+
+
+--- 
+
+![大前端洞见](https://user-images.githubusercontent.com/8676711/76761610-b0790f80-67ca-11ea-8829-9b7a3898ed51.png)
+
