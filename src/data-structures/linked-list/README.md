@@ -562,6 +562,7 @@ var isPalindrome = function(head) {
 
 [约瑟夫问题](https://zh.wikipedia.org/wiki/约瑟夫斯问题)
 
+约瑟夫环
 
 --- 
 

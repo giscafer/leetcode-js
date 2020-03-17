@@ -1,5 +1,9 @@
 # leetcode-js
-my leetcode solution in javascript
+
+* 数据结构&算法学习
+  * 数组
+  * [链表](./src/data-structures/linked-list/)
+  * [栈](./src/data-structures/stack/)
 
 
 ## Usage
