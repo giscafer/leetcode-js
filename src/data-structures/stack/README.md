@@ -17,12 +17,25 @@
 
 > **栈是一种“操作受限”的线性表**，只允许在一端插入和删除数据。当某个数据集合只涉及在一端插入和删除数据，并且满足后进先出、先进后出的特性，我们就应该首选“栈”这种数据结构。
 
-## 参考
-
-- [Wikipedia](<https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>)
-- [YouTube](https://www.youtube.com/watch?v=wjI1WNcIntg&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=3&)
 
 <!--ts-->
+   * [栈](#栈)
+      * [参考资料](#参考资料)
+      * [实现一个栈](#实现一个栈)
+      * [栈在软件工程中的实际应用有哪些？](#栈在软件工程中的实际应用有哪些)
+      * [如何实现浏览器的前进、后退功能？](#如何实现浏览器的前进后退功能)
+      * [讲到用函数调用栈来保存临时变量，为什么函数调用要用“栈”来保存临时变量呢？用其他数据结构不行吗？](#讲到用函数调用栈来保存临时变量为什么函数调用要用栈来保存临时变量呢用其他数据结构不行吗)
+      * [JVM 内存管理中有个“堆栈”的概念。栈内存用来存储局部变量和方法调用，堆内存用来存储 Java 中的对象。那 JVM 里面的“栈”跟我们这里说的“栈”是不是一回事呢？如果不是，那它为什么又叫作“栈”呢？](#jvm-内存管理中有个堆栈的概念栈内存用来存储局部变量和方法调用堆内存用来存储-java-中的对象那-jvm-里面的栈跟我们这里说的栈是不是一回事呢如果不是那它为什么又叫作栈呢)
+      * [leetcode 上关于栈的题目：20,155,232,844,224,682,496。](#leetcode-上关于栈的题目20155232844224682496)
+         * [20. 有效的括号](#20-有效的括号)
+         * [155. 最小栈](#155-最小栈)
+         * [232. 用栈实现队列](#232-用栈实现队列)
+         * [844. 比较含退格的字符串](#844-比较含退格的字符串)
+         * [224. 基本计算器](#224-基本计算器)
+            * [最优解](#最优解)
+         * [682. 棒球比赛](#682-棒球比赛)
+         * [496. 下一个更大元素 I](#496-下一个更大元素-i)
+
 <!--te-->
 
 ## 实现一个栈
@@ -313,7 +326,7 @@ var backspaceCompare = function(S, T) {
 
 实现一个基本的计算器来计算一个简单的字符串表达式的值。
 
-字符串表达式可以包含左括号 ( ，右括号 )，加号 + ，减号 -，非负整数和空格  。
+字符串表达式可以包含左括号 ( ，右括号 )，加号 + ，减号 -，非负整数和空格 。
 
 https://leetcode-cn.com/problems/basic-calculator/
 
@@ -400,7 +413,6 @@ console.log(calculate('2147483647')); // 2147483647
 console.log(calculate('1+1')); // 2
 console.log(calculate('2-1 + 2 +1-1-4')); // -1
 console.log(calculate('(1+(4+5+2)-3)+(6+8)')); //23
-
 ```
 
 #### 最优解
@@ -428,7 +440,7 @@ console.log(calculate('(1+(4+5+2)-3)+(6+8)')); //23
 左括号 -> 将当前的 sum 和 符号保存到 stack 中，为了后面遇到右括号时的计算，
 后面计算的结果和栈里的值做运算的时候，只需要让后面运算的值 * 刚刚保存的符号 + sum
 
-右括号 -> 执行 curr = curr * stack.pop(){ 这是上面刚刚保存的符号 } + 
+右括号 -> 执行 curr = curr * stack.pop(){ 这是上面刚刚保存的符号 } +
 stack.pop(){ 这是上面刚刚保存的运算结果 }
 
 数字 -> 利用一个临时变量 temp 存储所有连续的数字，直到数字不再连续，
@@ -440,66 +452,59 @@ stack.pop(){ 这是上面刚刚保存的运算结果 }
 ```
 
 ```js
-var calculate = function (s) {
-    let sum = 0,
-        stack = [],
-        sign = 1,
-        i = 0,
-        n = s.length;
+var calculate = function(s) {
+  let sum = 0,
+    stack = [],
+    sign = 1,
+    i = 0,
+    n = s.length;
 
-    while (i < n) {
-        let c = s.charAt(i);
-        if (c === ' ') {
-            i++;
-        }
-        else if (c === '-') {
-            sign = -1;
-            i++;
-        }
-        else if (c === '+') {
-            sign = 1;
-            i++;
-        }
-        else if (c === '(') {
-            stack.push(sum, sign);
-            sum = 0;
-            sign = 1;
-            i++;
-        }
-        else if (c === ')') {
-            sum = sum * stack.pop() + stack.pop();
-            i++;
-        }
-        else {
-            let temp = c;
-            i++;
-            while (i < n && isNumber(s.charAt(i))) {
-                temp += s.charAt(i);
-                i++;
-            }
-            sum += Number(temp) * sign;
-        }
+  while (i < n) {
+    let c = s.charAt(i);
+    if (c === ' ') {
+      i++;
+    } else if (c === '-') {
+      sign = -1;
+      i++;
+    } else if (c === '+') {
+      sign = 1;
+      i++;
+    } else if (c === '(') {
+      stack.push(sum, sign);
+      sum = 0;
+      sign = 1;
+      i++;
+    } else if (c === ')') {
+      sum = sum * stack.pop() + stack.pop();
+      i++;
+    } else {
+      let temp = c;
+      i++;
+      while (i < n && isNumber(s.charAt(i))) {
+        temp += s.charAt(i);
+        i++;
+      }
+      sum += Number(temp) * sign;
     }
+  }
 
-    return sum;
+  return sum;
 };
 
 function isNumber(n) {
-    n = Number(n);
-    return typeof n === 'number' && !isNaN(n);
+  n = Number(n);
+  return typeof n === 'number' && !isNaN(n);
 }
-
 ```
-
 
 ### 682. 棒球比赛
 
 你现在是棒球比赛记录员。
-给定一个字符串列表，每个字符串可以是以下四种类型之一：
-1.整数（一轮的得分）：直接表示您在本轮中获得的积分数。
-2. "+"（一轮的得分）：表示本轮获得的得分是前两轮有效 回合得分的总和。
-3. "D"（一轮的得分）：表示本轮获得的得分是前一轮有效 回合得分的两倍。
-4. "C"（一个操作，这不是一个回合的分数）：表示您获得的最后一个有效 回合的分数是无效的，应该被移除。
+给定一个字符串列表，每个字符串可以是以下四种类型之一： 1.整数（一轮的得分）：直接表示您在本轮中获得的积分数。
+
+2. "+"（一轮的得分）：表示本轮获得的得分是前两轮有效   回合得分的总和。
+3. "D"（一轮的得分）：表示本轮获得的得分是前一轮有效   回合得分的两倍。
+4. "C"（一个操作，这不是一个回合的分数）：表示您获得的最后一个有效   回合的分数是无效的，应该被移除。
 
 每一轮的操作都是永久性的，可能会对前一轮和后一轮产生影响。
 你需要返回你在所有回合中得分的总和。
@@ -507,11 +512,90 @@ function isNumber(n) {
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/baseball-game
 
+```js
+/**
+ * @param {string[]} ops
+ * @return {number}
+ */
+var calPoints = function(ops) {
+  let stack = [];
+  let len = ops.length;
+  let i = 0;
+  while (i < len) {
+    if (ops[i] === 'C') {
+      stack.pop();
+    } else if (ops[i] === 'D') {
+      let a = stack[stack.length - 1];
+      stack.push(2 * a);
+    } else if (ops[i] === '+') {
+      let score = stack[stack.length - 1] + stack[stack.length - 2];
+      stack.push(score);
+    } else {
+      // 直接得分
+      stack.push(Number(ops[i]));
+    }
+
+    i++;
+  }
+  return stack.reduce(function(prev, curr, index) {
+    return (prev += curr);
+  });
+};
+```
+
+### 496. 下一个更大元素 I
+
+给定两个没有重复元素的数组  nums1 和  nums2 ，其中 nums1  是  nums2  的子集。找到  nums1  中每个元素在  nums2  中的下一个比其大的值。
+
+nums1  中数字  x  的下一个更大元素是指  x  在  nums2  中对应位置的右边的第一个比  x  大的元素。如果不存在，对应位置输出-1。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/next-greater-element-i
 
 ```js
+/**
+ * 字典加栈，因为是子集的关系，所以只需要将nums2做单调栈的判断即可，然后用map记录数组的关系。
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var nextGreaterElement = function(nums1, nums2) {
+  let map = {};
+  let stack = [];
+  let res = [];
+  for (let n of nums2) {
+    if (stack.length == 0) {
+      stack.push(n);
+    } else {
+      if (n > stack[stack.length - 1]) {
+        // 取完栈中所有小于n的数据
+        let i = stack.length - 1;
+        while (stack[i] < n) {
+          map[stack[i]] = n;
+          stack.pop();
+          i -= 1;
+        }
+      }
 
+      stack.push(n);
+    }
+  }
+  for (let s of stack) {
+    map[s] = -1;
+  }
 
+  for (let i = 0; i < nums1.length; i++) {
+    res[i] = map[nums1[i]];
+  }
+
+  return res;
+};
 ```
+
+## 参考资料
+
+- [Wikipedia](<https://en.wikipedia.org/wiki/Stack_(abstract_data_type)>)
+- [YouTube](https://www.youtube.com/watch?v=wjI1WNcIntg&list=PLLXdhg_r2hKA7DPDsunoDZ-Z769jWn4R8&index=3&)
 
 
 ---

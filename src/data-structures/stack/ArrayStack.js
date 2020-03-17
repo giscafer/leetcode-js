@@ -18,7 +18,7 @@ export default class ArrayStack {
 
   push(val) {
     this.stack.push(val);
-    this.count++;
+    this.count += 1;
     return val;
   }
 
@@ -26,7 +26,7 @@ export default class ArrayStack {
     if (this.count === 0) {
       return null;
     }
-    this.count--;
+    this.count -= 1;
     return this.stack.pop();
   }
 
