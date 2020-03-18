@@ -602,4 +602,4 @@ var nextGreaterElement = function(nums1, nums2) {
 - [front-end-manual 前端手册](https://github.com/giscafer/front-end-manual)
 - [数据结构与算法学习 & leetcode JavaScript 题解](https://github.com/giscafer/leetcode-js)
 
-![大前端洞见](https://user-images.githubusercontent.com/8676711/76761610-b0790f80-67ca-11ea-8829-9b7a3898ed51.png)
+![大前端洞见](http://ww1.sinaimg.cn/large/940e68eegy1gcy1r1yeq5j20k008ctas.jpg)
