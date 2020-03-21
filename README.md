@@ -1,9 +1,12 @@
 # leetcode-js
 
-* 数据结构&算法学习
-  * 数组
-  * [链表](./src/data-structures/linked-list/)
-  * [栈](./src/data-structures/stack/)
+- 数据结构
+  - 数组
+  - [链表](./src/data-structures/linked-list/)
+  - [栈](./src/data-structures/stack/)
+  - [队列](./src/data-structures/queue/)
+- 算法
+  - [递归](./src/algorithms/recursion/)
 
 
 ## Usage
