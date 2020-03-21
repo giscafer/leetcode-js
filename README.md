@@ -7,6 +7,7 @@
   - [队列](./src/data-structures/queue/)
 - 算法
   - [递归](./src/algorithms/recursion/)
+  - [排序](./src/algorithms/sorting/)
 
 
 ## Usage
