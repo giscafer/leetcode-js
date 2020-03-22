@@ -1,5 +1,8 @@
 # 递归
 
+递归是一种应用非常广泛的算法（或者编程技巧），递归代码可能非常高效和简洁，但是也是有很多弊端的，要熟悉了解递归算法，才能写好递归。
+
+
 ## 递归需要满足的三个条件
 
 - 一个问题的解可以分解为几个子问题的解
@@ -36,3 +39,10 @@
 比如斐波那契数，如果用递归，N的数值过大，会引起栈溢出
 https://leetcode-cn.com/problems/fibonacci-number/
 
+
+--- 
+
+- [front-end-manual 前端手册](https://github.com/giscafer/front-end-manual)
+- [数据结构与算法学习 & leetcode JavaScript 题解](https://github.com/giscafer/leetcode-js)
+
+![大前端洞见](http://ww1.sinaimg.cn/large/940e68eegy1gcy1r1yeq5j20k008ctas.jpg)
