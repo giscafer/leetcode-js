@@ -1,16 +1,3 @@
-/**
- * 快排，原地排序，非稳定性排序，空间复杂度为O(1)，时间复杂度为O(nlogn)
- * @param {Array} arr
- */
-export default function quickSort(arr, left, right) {
-  if (isNaN(Number(left)) || isNaN(Number(left))) return;
-  if (left >= right) return;
-  const pivot = right;
-  const partitionIndex = partition(arr, pivot, left, right);
-  quickSort(arr, left, partitionIndex - 1 < left ? left : partitionIndex - 1);
-  quickSort(arr, partitionIndex + 1 > right ? right : partitionIndex + 1, right);
-}
-
 const swap = (arr, i, j) => {
   const tmp = arr[i];
   arr[i] = arr[j];
@@ -25,15 +12,28 @@ const swap = (arr, i, j) => {
  * @param {Number} left 起始索引
  * @param {Number} right 终止索引
  */
-function partition(arr, pivot, left, right) {
+const partition = (arr, pivot, left, right) => {
   const pivotVal = arr[pivot];
   let startIndex = left;
   for (let i = left; i < right; i += 1) {
-    if (arr[i] < pivotVal) { // 将小于分区值都左移
+    if (arr[i] < pivotVal) {
+      // 将小于分区值都左移
       swap(arr, i, startIndex);
       startIndex += 1;
     }
   }
   swap(arr, startIndex, pivot); // startIndex 就是分区值分治的最终位置
   return startIndex;
+};
+
+/**
+ * 快排，原地排序，非稳定性排序，空间复杂度为O(1)，时间复杂度为O(nlogn)
+ * @param {Array} arr
+ */
+export default function quickSort(arr, left, right) {
+  if (left >= right) return;
+  const pivot = right;
+  const partitionIndex = partition(arr, pivot, left, right);
+  quickSort(arr, left, partitionIndex - 1 < left ? left : partitionIndex - 1);
+  quickSort(arr, partitionIndex + 1 > right ? right : partitionIndex + 1, right);
 }
