@@ -24,6 +24,17 @@
 
 在线算法题库：[LeetCode](https://leetcode-cn.com/) 或者 [Hacker Rank](https://www.hackerrank.com/)
 
+
+#### Github 资源 🔥
+
+> 比较全的几个库
+- https://github.com/trekhleb/javascript-algorithms
+- https://github.com/labuladong/fucking-algorithm
+- https://github.com/apachecn/Interview
+- https://github.com/azl397985856/leetcode
+- https://github.com/geekxh/hello-algorithm 
+
+
 #### 推荐的讲解算法的网站、好博客：
 
 - http://www.csie.ntnu.edu.tw/~u91029/ 讲解、代码格式、图表都很规范，覆盖广
@@ -32,13 +43,6 @@
 - http://fanhq666.blog.163.com/blog/ 范浩强的博客
 - http://watashi.ws/blog/@watashi 的博客
 - 极客时间的《数据结构与算法之美》 王争
-
-#### Github 资源
-> 比较全的几个库
-- https://github.com/trekhleb/javascript-algorithms
-- https://github.com/labuladong/fucking-algorithm
-- https://github.com/apachecn/Interview
-- https://github.com/azl397985856/leetcode
 
 #### 有口碑的稳定的在线题库：
 - http://uoj.ac UOJ
