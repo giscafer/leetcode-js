@@ -34,6 +34,8 @@
 - https://github.com/azl397985856/leetcode
 - https://github.com/geekxh/hello-algorithm 
 
+- [leetcode_company_wise_questions](https://github.com/MysteryVaibhav/leetcode_company_wise_questions) This is a repository containing the list of company wise questions available on leetcode premium 
+
 
 #### 推荐的讲解算法的网站、好博客：
 
